@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html lang="nl">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -13,20 +12,17 @@
             color: #333;
             position: relative;
         }
-
         header {
             background: linear-gradient(90deg, #000000, #ff8c00);
             color: #fff;
             padding: 20px 0;
             text-align: center;
         }
-
         header h1 {
             margin: 0;
             font-size: 3rem;
             text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
         }
-
         nav {
             background-color: #000000;
             padding: 15px;
@@ -35,7 +31,6 @@
             top: 0;
             z-index: 1000;
         }
-
         nav a {
             color: #fff;
             text-decoration: none;
@@ -46,13 +41,11 @@
             transition: transform 0.2s, background-color 0.2s;
             display: inline-block;
         }
-
         nav a:hover {
             background-color: #ff8c00;
             transform: translateY(-5px);
             box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
         }
-
         .admin-button {
             position: absolute;
             top: 15px;
@@ -65,11 +58,9 @@
             border-radius: 5px;
             transition: background-color 0.3s ease;
         }
-
         .admin-button:hover {
             background-color: #ff6500;
         }
-
         .admin-panel {
             display: none;
             position: fixed;
@@ -85,11 +76,9 @@
             max-width: 600px;
             overflow-y: auto;
         }
-
         .admin-panel h3 {
             margin-top: 0;
         }
-
         .admin-panel input[type="text"],
         .admin-panel textarea {
             width: 100%;
@@ -98,7 +87,6 @@
             border-radius: 5px;
             border: 1px solid #ddd;
         }
-
         .admin-panel input[type="submit"] {
             background-color: #ff8c00;
             color: #fff;
@@ -109,11 +97,9 @@
             transition: background-color 0.3s ease;
             width: 100%;
         }
-
         .admin-panel input[type="submit"]:hover {
             background-color: #ff6500;
         }
-
         .container {
             max-width: 1200px;
             margin: 30px auto;
@@ -122,13 +108,11 @@
             box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
             border-radius: 10px;
         }
-
         .container h2 {
             text-align: center;
             color: #ff8c00;
             margin-bottom: 20px;
         }
-
         .news-item {
             margin-bottom: 20px;
             padding: 15px;
@@ -137,27 +121,22 @@
             transition: transform 0.2s, box-shadow 0.2s;
             position: relative;
         }
-
         .news-item:hover {
             transform: translateY(-3px);
             box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
         }
-
         .news-item h3 {
             color: #000000;
             margin: 0 0 10px 0;
         }
-
         .news-item p {
             color: #666;
         }
-
         .news-item .news-date {
             font-size: 0.9rem;
             color: #999;
             margin-top: 5px;
         }
-
         .news-item .delete-button {
             position: absolute;
             top: 10px;
@@ -171,11 +150,9 @@
             font-size: 0.8rem;
             transition: background-color 0.3s ease;
         }
-
         .news-item .delete-button:hover {
             background-color: #cc0000;
         }
-
         footer {
             background-color: #000000;
             color: #fff;
@@ -183,15 +160,12 @@
             padding: 15px 0;
             margin-top: 20px;
         }
-
         footer p {
             margin: 0;
         }
-
         .admin-nav {
             margin-bottom: 20px;
         }
-
         .admin-nav button {
             background-color: #ff8c00;
             color: #fff;
@@ -202,13 +176,11 @@
             transition: background-color 0.3s ease;
             margin-right: 10px;
         }
-
         .admin-nav button:hover {
             background-color: #ff6500;
         }
     </style>
 </head>
-
 <body onload="loadNews()">
 
     <header>
@@ -232,6 +204,11 @@
             <h3>Laatste Nieuws</h3>
             <!-- Nieuwsitems worden hier toegevoegd -->
         </div>
+    </div>
+
+    <footer>
+        <p>&copy; 2024 Toekomst Relegem. Alle rechten voorbehouden.</p>
+    </footer>
 
     <div class="admin-panel" id="adminPanel">
         <div class="admin-nav">
@@ -242,17 +219,6 @@
             <input type="text" id="newsTitle" placeholder="Titel">
             <textarea id="newsContent" placeholder="Inhoud" rows="5"></textarea>
             <input type="submit" value="Plaatsen" onclick="postNews()">
-        </div>
-        <div id="adminCalendar" style="display: none;">
-            <h3>Kalender Aanpassen</h3>
-            <textarea id="calendarContent" placeholder="Kalender Inhoud" rows="5"></textarea>
-            <input type="submit" value="Bijwerken" onclick="updateCalendar()">
-        </div>
-        <div id="adminNextMatch" style="display: none;">
-            <h3>Volgende Wedstrijd</h3>
-            <input type="text" id="nextMatchTitle" placeholder="Titel">
-            <textarea id="nextMatchContent" placeholder="Inhoud" rows="5"></textarea>
-            <input type="submit" value="Bijwerken" onclick="updateNextMatch()">
         </div>
     </div>
 
@@ -285,129 +251,71 @@
         }
 
         function showSection(section) {
-            document.getElementById('adminNews').style.display = 'none';
-            
-            if (section === 'news') {
-                document.getElementById('adminNews').style.display = 'block';
-            }
+            document.getElementById('adminNews').style.display = section === 'news' ? 'block' : 'none';
         }
 
-        function postNews() {
-            const title = document.getElementById('newsTitle').value;
-            const content = document.getElementById('newsContent').value;
-            if (title && content) {
-                const date = new Date().toLocaleDateString('nl-NL');
-                
-                // Create a news item object
-                const newsItem = {
-                    title: title,
-                    content: content,
-                    date: date
-                };
-                
-                // Retrieve existing news from localStorage
-                let newsList = JSON.parse(localStorage.getItem('newsList')) || [];
-                
-                // Add the new item to the list
-                newsList.push(newsItem);
-                
-                // Save the updated list to localStorage
-                localStorage.setItem('newsList', JSON.stringify(newsList));
-                
-                // Add the news item to the page
-                addNewsItemToPage(newsItem);
-                
-                // Clear input fields
-                document.getElementById('newsTitle').value = '';
-                document.getElementById('newsContent').value = '';
-                alert('Nieuwsbericht geplaatst!');
-            } else {
-                alert('Vul zowel een titel als inhoud in.');
-            }
-        }
+        async function postNews() {
+    const title = document.getElementById('newsTitle').value;
+    const content = document.getElementById('newsContent').value;
 
-        function addNewsItemToPage(newsItem) {
+    console.log('Title:', title);
+    console.log('Content:', content);
+
+    const response = await fetch('/post-news', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({ title, content })
+    });
+
+    if (response.ok) {
+        alert('Nieuwsbericht geplaatst!');
+        loadNews(); // Update de lijst van nieuwsberichten
+    } else {
+        alert('Er is iets misgegaan. Probeer het opnieuw.');
+    }
+}
+
+
+        async function loadNews() {
             const newsContainer = document.getElementById('nieuws');
-            const newNewsItem = document.createElement('div');
-            newNewsItem.classList.add('news-item');
-            newNewsItem.innerHTML = `
-                <h3>${newsItem.title}</h3>
-                <p>${newsItem.content}</p>
-                <p class="news-date">Geplaatst op: ${newsItem.date}</p>
-                <button class="delete-button" onclick="openDeletePanel(this)">Verwijderen</button>
-            `;
-            newsContainer.appendChild(newNewsItem);
+            newsContainer.innerHTML = '';
+
+            const response = await fetch('/get-news');
+            const newsItems = await response.json();
+
+            newsItems.forEach(item => {
+                const newsItem = document.createElement('div');
+                newsItem.classList.add('news-item');
+                newsItem.innerHTML = `
+                    <h3>${item.title}</h3>
+                    <p>${item.content}</p>
+                    <p class="news-date">${new Date(item.date).toLocaleString()}</p>
+                    <button class="delete-button" onclick="deleteNews('${item.id}')">Verwijder</button>
+                `;
+                newsContainer.appendChild(newsItem);
+            });
         }
 
-        function openDeletePanel(button) {
-            const newsItem = button.parentElement;
-            const title = newsItem.querySelector('h3').textContent;
-            const deletePanel = document.getElementById('adminDelete');
-            deletePanel.style.display = 'block';
-            deletePanel.setAttribute('data-title', title); // Save the title for deletion
-        }
+        async function deleteNews(id) {
+            const code = prompt('Voer de beheercode in om dit bericht te verwijderen:');
+            if (code !== 'filipvunckxtoekomstrelegem') {
+                alert('Onjuiste code!');
+                return;
+            }
 
-        function checkDeleteCode() {
-            const code = document.getElementById('adminDeleteCode').value;
-            const correctCode = 'filipvunckxtoekomstrelegem'; // Same code as login
-            const deletePanel = document.getElementById('adminDelete');
-            const title = deletePanel.getAttribute('data-title');
+            const response = await fetch(`/delete-news/${id}`, {
+                method: 'DELETE'
+            });
 
-            if (code === correctCode) {
-                deleteNews(title);
-                deletePanel.style.display = 'none';
+            if (response.ok) {
                 alert('Nieuwsbericht verwijderd!');
+                loadNews();
             } else {
-                alert('Onjuiste code! Probeer het opnieuw.');
+                alert('Er is iets misgegaan. Probeer het opnieuw.');
             }
         }
-
-        function deleteNews(title) {
-            // Retrieve existing news from localStorage
-            let newsList = JSON.parse(localStorage.getItem('newsList')) || [];
-            
-            // Filter out the deleted item
-            newsList = newsList.filter(item => item.title !== title);
-            
-            // Save the updated list to localStorage
-            localStorage.setItem('newsList', JSON.stringify(newsList));
-            
-            // Remove the news item from the page
-            const newsContainer = document.getElementById('nieuws');
-            const newsItems = newsContainer.getElementsByClassName('news-item');
-            for (let i = 0; i < newsItems.length; i++) {
-                if (newsItems[i].querySelector('h3').textContent === title) {
-                    newsContainer.removeChild(newsItems[i]);
-                    break;
-                }
-            }
-        }
-
-        function loadNews() {
-            // Retrieve news from localStorage
-            const newsList = JSON.parse(localStorage.getItem('newsList')) || [];
-            
-            // Add each news item to the page
-            newsList.forEach(newsItem => {
-                addNewsItemToPage(newsItem);
-            });
-        }
-
-        document.querySelectorAll('nav a').forEach(anchor => {
-            anchor.addEventListener('click', function (e) {
-                e.preventDefault();
-
-                const targetId = this.getAttribute('href').substring(1);
-                const targetElement = document.getElementById(targetId);
-
-                window.scrollTo({
-                    top: targetElement.offsetTop - document.querySelector('nav').offsetHeight,
-                    behavior: 'smooth'
-                });
-            });
-        });
     </script>
-
 </body>
-
 </html>
